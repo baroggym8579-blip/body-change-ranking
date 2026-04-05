@@ -197,7 +197,7 @@ export default function RankingPage() {
           <div className="flex items-center justify-center gap-3 mb-2">
             <Trophy className="w-7 h-7 text-[hsl(var(--primary))]" />
             <h1 className="text-xl font-bold tracking-tight text-[hsl(var(--foreground))]">
-              BODY CHANGE RANKING
+              2026 BAROG RANKING
             </h1>
             <Flame className="w-7 h-7 text-[hsl(var(--primary))]" />
           </div>
@@ -259,6 +259,9 @@ export default function RankingPage() {
                       <div className="flex items-center gap-2 mb-1">
                         <span className="font-semibold text-[hsl(var(--foreground))] truncate">
                           {entry.name}
+                        </span>
+                        <span className="shrink-0 text-xs font-medium px-1.5 py-0.5 rounded bg-red-950/60 text-red-400 border border-red-900/40">
+                          {entry.dayCount}일차
                         </span>
                       </div>
                       <ScoreBar score={entry.score} maxScore={maxScore} />
