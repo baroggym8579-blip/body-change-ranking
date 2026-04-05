@@ -125,6 +125,15 @@ export class DatabaseStorage implements IStorage {
 
       const score = muscleScore + fatScore;
 
+      // N일차 계산 (첫 측정일 = 1일차)
+      const startDate = first.date;
+      const today = new Date().toISOString().slice(0, 10);
+      const msPerDay = 1000 * 60 * 60 * 24;
+      const diffDays = Math.floor(
+        (new Date(today).getTime() - new Date(startDate).getTime()) / msPerDay
+      );
+      const dayCount = diffDays + 1; // 첫날 = 1일차
+
       rankings.push({
         rank: 0,
         memberId: member.id,
@@ -136,6 +145,8 @@ export class DatabaseStorage implements IStorage {
         bodyFat: latest.bodyFat,
         muscleChange: Math.round(muscleChange * 10) / 10,
         fatChange: Math.round(fatChange * 10) / 10,
+        startDate,
+        dayCount,
       });
     }
 
