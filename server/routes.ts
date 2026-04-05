@@ -65,6 +65,21 @@ export async function registerRoutes(
     if (!result.success) {
       return res.status(400).json({ message: "입력값이 올바르지 않습니다.", errors: result.error.errors });
     }
+
+    // 90일 제한: 첫 측정일 기준 90일 이후 데이터 등록 차단
+    const existing = await storage.getMeasurementsByMember(result.data.memberId);
+    if (existing.length > 0) {
+      const firstDate = new Date(existing[0].date);
+      const inputDate = new Date(result.data.date);
+      const msPerDay = 1000 * 60 * 60 * 24;
+      const diffDays = Math.floor((inputDate.getTime() - firstDate.getTime()) / msPerDay);
+      if (diffDays >= 90) {
+        return res.status(400).json({
+          message: `쳈 측정일(${existing[0].date})으로부터 90일이 경과하여 데이터를 등록할 수 없습니다. (${diffDays + 1}일차)`,
+        });
+      }
+    }
+
     const measurement = await storage.createMeasurement(result.data);
     res.json(measurement);
   });
