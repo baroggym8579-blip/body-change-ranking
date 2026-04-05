@@ -39,6 +39,8 @@ export type RankingEntry = {
   bodyFat: number;
   muscleChange: number;
   fatChange: number;
+  startDate: string;   // 첫 측정일 (YYYY-MM-DD)
+  dayCount: number;    // 오늘 기준 N일차
 };
 
 export type MemberWithMeasurements = Member & {
