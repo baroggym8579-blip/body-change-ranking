@@ -11,7 +11,7 @@ import {
   CartesianGrid,
   Legend,
 } from "recharts";
-import { Trophy, TrendingUp, TrendingDown, Activity, Users, Flame, ChevronDown, ChevronUp } from "lucide-react";
+import { Trophy, TrendingUp, TrendingDown, Activity, Users, Flame, ChevronDown, ChevronUp, Gift, Medal } from "lucide-react";
 import { useState } from "react";
 
 function RankBadge({ rank }: { rank: number }) {
@@ -202,7 +202,7 @@ export default function RankingPage() {
             <Flame className="w-7 h-7 text-[hsl(var(--primary))]" />
           </div>
           <p className="text-center text-sm text-[hsl(var(--muted-foreground))]">
-            D-90 써-머 바디체인지 랭킹전
+            D-90 써머 바디체인지 랭킹전
           </p>
 
           {/* Summary Stats */}
@@ -297,14 +297,56 @@ export default function RankingPage() {
           </div>
         )}
 
-        {/* Scoring info */}
-        <div className="mt-8 p-4 rounded-lg border border-[hsl(var(--border))] bg-[hsl(var(--card))]">
-          <h3 className="text-sm font-semibold text-[hsl(var(--foreground))] mb-2">채점 기준</h3>
-          <ul className="text-xs text-[hsl(var(--muted-foreground))] space-y-1">
-            <li>• 근골격량 0.1kg 증가 = 1점</li>
-            <li>• 체지방량 0.1kg 감소 = 1점</li>
-            <li>• 동일 점수 시 체중이 낮은 사람이 상위</li>
-          </ul>
+        {/* Bottom info blocks */}
+        <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
+
+          {/* 채점 기준 */}
+          <div className="p-4 rounded-lg border border-[hsl(var(--border))] bg-[hsl(var(--card))]">
+            <h3 className="text-sm font-semibold text-[hsl(var(--foreground))] mb-2">채점 기준</h3>
+            <ul className="text-xs text-[hsl(var(--muted-foreground))] space-y-1">
+              <li>• 근골격량 0.1kg 증가 = 1점</li>
+              <li>• 체지방량 0.1kg 감소 = 1점</li>
+              <li>• 동일 점수 시 체중이 낮은 사람이 상위</li>
+            </ul>
+          </div>
+
+          {/* 시상 안내 */}
+          <div className="p-4 rounded-lg border border-[hsl(var(--border))] bg-[hsl(var(--card))]">
+            <h3 className="text-sm font-semibold text-[hsl(var(--foreground))] mb-3 flex items-center gap-1.5">
+              <Gift className="w-3.5 h-3.5 text-[hsl(var(--primary))]" />
+              시상 안내
+            </h3>
+            <ul className="space-y-2">
+              {/* 1~3등 */}
+              <li className="flex items-center gap-2">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-gradient-to-br from-yellow-400 to-amber-600 text-black text-xs font-bold shrink-0">1</span>
+                <span className="text-xs text-[hsl(var(--foreground))] font-medium">상금 100만원</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-gradient-to-br from-gray-300 to-gray-500 text-black text-xs font-bold shrink-0">2</span>
+                <span className="text-xs text-[hsl(var(--foreground))] font-medium">상금 50만원</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-gradient-to-br from-orange-400 to-orange-700 text-black text-xs font-bold shrink-0">3</span>
+                <span className="text-xs text-[hsl(var(--foreground))] font-medium">회원권 3개월</span>
+              </li>
+              {/* 구분선 */}
+              <li className="border-t border-[hsl(var(--border))] pt-2 mt-1">
+                <p className="text-xs text-[hsl(var(--muted-foreground))] font-medium mb-1.5 flex items-center gap-1">
+                  <Medal className="w-3 h-3" /> 참가상
+                </p>
+                <ul className="space-y-1 pl-1">
+                  <li className="text-xs text-[hsl(var(--muted-foreground))]">
+                    <span className="text-[hsl(var(--foreground))]">짝수 등수</span> — 일일무료입장권 3매 <span className="text-red-400">(양도 가능)</span>
+                  </li>
+                  <li className="text-xs text-[hsl(var(--muted-foreground))]">
+                    <span className="text-[hsl(var(--foreground))]">홀수 등수</span> — <span className="italic text-[hsl(var(--muted-foreground))]">추후 공지</span>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+
         </div>
       </div>
     </div>
