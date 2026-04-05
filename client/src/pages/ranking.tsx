@@ -202,7 +202,7 @@ export default function RankingPage() {
             <Flame className="w-7 h-7 text-[hsl(var(--primary))]" />
           </div>
           <p className="text-center text-sm text-[hsl(var(--muted-foreground))]">
-            바디체인지 랭킹전
+            D-90 써-머 바디체인지 랭킹전
           </p>
 
           {/* Summary Stats */}
