@@ -179,8 +179,17 @@ function MeasurementForm() {
       setBodyFat("");
       toast({ title: "측정 데이터가 등록되었습니다." });
     },
-    onError: () => {
-      toast({ title: "등록 실패", description: "측정 데이터 등록에 실패했습니다.", variant: "destructive" });
+    onError: (err: any) => {
+      let description = "측정 데이터 등록에 실패했습니다.";
+      try {
+        // apiRequest는 "400: {json}" 형식으로 throw함
+        const jsonPart = err.message?.replace(/^\d+:\s*/, "");
+        const data = JSON.parse(jsonPart);
+        if (data?.message) description = data.message;
+      } catch {
+        if (err?.message) description = err.message;
+      }
+      toast({ title: "등록 실패", description, variant: "destructive" });
     },
   });
 
