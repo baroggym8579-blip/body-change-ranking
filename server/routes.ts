@@ -3,7 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertMemberSchema, insertMeasurementSchema } from "@shared/schema";
 
-const ADMIN_PASSWORD = "bodychange2026";
+const ADMIN_PASSWORD = "112211";
 
 export async function registerRoutes(
   httpServer: Server,
