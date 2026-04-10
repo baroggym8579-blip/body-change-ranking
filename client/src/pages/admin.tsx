@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { apiRequest, queryClient } from "@/lib/queryClient";
+import { apiRequest, queryClient, setAdminPassword } from "@/lib/queryClient";
 import type { Member, Measurement } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
@@ -38,6 +38,7 @@ function LoginScreen({ onLogin }: { onLogin: () => void }) {
       const res = await apiRequest("POST", "/api/auth/verify", { password });
       const data = await res.json();
       if (data.success) {
+        setAdminPassword(password);
         onLogin();
       }
     } catch {
@@ -216,12 +217,12 @@ function MeasurementForm() {
             <select
               value={memberId}
               onChange={(e) => setMemberId(e.target.value)}
-              className="col-span-2 h-9 rounded-md border border-[hsl(var(--input))] bg-transparent px-3 text-sm text-[hsl(var(--foreground))]"
+              className="col-span-2 h-9 rounded-md border border-[hsl(var(--input))] bg-white px-3 text-sm text-black"
               data-testid="select-member"
             >
-              <option value="">회원 선택</option>
+              <option value="" style={{ color: "black", background: "white" }}>회원 선택</option>
               {memberList?.map((m) => (
-                <option key={m.id} value={m.id}>
+                <option key={m.id} value={m.id} style={{ color: "black", background: "white" }}>
                   {m.name} ({m.memberNumber})
                 </option>
               ))}
