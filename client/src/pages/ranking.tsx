@@ -202,7 +202,7 @@ export default function RankingPage() {
             <Flame className="w-7 h-7 text-[hsl(var(--primary))]" />
           </div>
           <p className="text-center text-sm text-[hsl(var(--muted-foreground))]">
-            D-90 (써머) 바디체인지 랭킹전
+            바디체인지 랭킹전
           </p>
 
           {/* Summary Stats */}
@@ -340,7 +340,7 @@ export default function RankingPage() {
                     <span className="text-[hsl(var(--foreground))]">짝수 등수</span> — 일일무료입장권 3매 <span className="text-red-400">(양도 가능)</span>
                   </li>
                   <li className="text-xs text-[hsl(var(--muted-foreground))]">
-                    <span className="text-[hsl(var(--foreground))]">홀수 등수</span> — 추후 공지
+                    <span className="text-[hsl(var(--foreground))]">홀수 등수</span> — <span className="italic text-[hsl(var(--muted-foreground))]">추후 공지</span>
                   </li>
                 </ul>
               </li>

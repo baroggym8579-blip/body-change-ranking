@@ -9,14 +9,27 @@ async function throwIfResNotOk(res: Response) {
   }
 }
 
+// 관리자 세션 비밀번호 관리
+export function setAdminPassword(pw: string) {
+  sessionStorage.setItem("admin_pw", pw);
+}
+export function getAdminPassword(): string | null {
+  return sessionStorage.getItem("admin_pw");
+}
+
 export async function apiRequest(
   method: string,
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
+  const headers: Record<string, string> = {};
+  if (data) headers["Content-Type"] = "application/json";
+  const pw = getAdminPassword();
+  if (pw) headers["x-admin-password"] = pw;
+
   const res = await fetch(`${API_BASE}${url}`, {
     method,
-    headers: data ? { "Content-Type": "application/json" } : {},
+    headers,
     body: data ? JSON.stringify(data) : undefined,
   });
 
@@ -30,7 +43,11 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
-    const res = await fetch(`${API_BASE}${queryKey.join("/")}`);
+    const headers: Record<string, string> = {};
+    const pw = getAdminPassword();
+    if (pw) headers["x-admin-password"] = pw;
+
+    const res = await fetch(`${API_BASE}${queryKey.join("/")}`, { headers });
 
     if (unauthorizedBehavior === "returnNull" && res.status === 401) {
       return null;
