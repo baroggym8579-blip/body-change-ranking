@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
 import type { RankingEntry, Measurement, Member } from "@shared/schema";
 import {
   LineChart,
@@ -58,13 +57,10 @@ function ScoreBar({ score, maxScore }: { score: number; maxScore: number }) {
 }
 
 function MemberChart({ memberId, name }: { memberId: number; name: string }) {
-  const { data: measurementData } = useQuery<Measurement[]>({
-    queryKey: ["/api/members", memberId, "measurements"],
-    queryFn: async () => {
-      const res = await apiRequest("GET", `/api/members/${memberId}/measurements`);
-      return res.json();
-    },
+  const { data: allMeasurements } = useQuery<Measurement[]>({
+    queryKey: ["/api/measurements"],
   });
+  const measurementData = allMeasurements?.filter((m) => m.memberId === memberId);
 
   if (!measurementData || measurementData.length < 2) {
     return (
@@ -202,7 +198,7 @@ export default function RankingPage() {
             <Flame className="w-7 h-7 text-[hsl(var(--primary))]" />
           </div>
           <p className="text-center text-sm text-[hsl(var(--muted-foreground))]">
-            D-90 (써머) 바디 체인지 랭킹전
+            바디체인지 랭킹전
           </p>
 
           {/* Summary Stats */}

@@ -3,7 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertMemberSchema, insertMeasurementSchema } from "@shared/schema";
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "112211";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "bodychange2026";
 
 // 관리자 인증 미들웨어: x-admin-password 헤더 확인
 function requireAdmin(req: Request, res: Response, next: NextFunction) {
@@ -98,6 +98,13 @@ export async function registerRoutes(
     const id = parseInt(req.params.id);
     await storage.deleteMeasurement(id);
     res.json({ success: true });
+  });
+
+  // 특정 회원 측정 기록 — 그래프용 공개 API (회원번호 미포함)
+  app.get("/api/chart/:id/measurements", async (req, res) => {
+    const id = parseInt(req.params.id);
+    const measurementList = await storage.getMeasurementsByMember(id);
+    res.json(measurementList);
   });
 
   // 랭킹 데이터 (공개 — 회원번호 제외)
