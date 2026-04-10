@@ -202,7 +202,7 @@ export default function RankingPage() {
             <Flame className="w-7 h-7 text-[hsl(var(--primary))]" />
           </div>
           <p className="text-center text-sm text-[hsl(var(--muted-foreground))]">
-            D-90 써머 바디체인지 랭킹전
+            바디체인지 랭킹전
           </p>
 
           {/* Summary Stats */}
@@ -304,7 +304,7 @@ export default function RankingPage() {
           <div className="p-4 rounded-lg border border-[hsl(var(--border))] bg-[hsl(var(--card))]">
             <h3 className="text-sm font-semibold text-[hsl(var(--foreground))] mb-2">채점 기준</h3>
             <ul className="text-xs text-[hsl(var(--muted-foreground))] space-y-1">
-              <li>• 근골격량 0.1kg 증가 = 1점</li>
+              <li>• 근골격량 0.1kg 증가 = 4점</li>
               <li>• 체지방량 0.1kg 감소 = 1점</li>
               <li>• 동일 점수 시 체중이 낮은 사람이 상위</li>
             </ul>
@@ -340,7 +340,7 @@ export default function RankingPage() {
                     <span className="text-[hsl(var(--foreground))]">짝수 등수</span> — 일일무료입장권 3매 <span className="text-red-400">(양도 가능)</span>
                   </li>
                   <li className="text-xs text-[hsl(var(--muted-foreground))]">
-                    <span className="text-[hsl(var(--foreground))]">홀수 등수</span> — <span className="italic text-[hsl(var(--muted-foreground))]">실리콘 텀블러</span>
+                    <span className="text-[hsl(var(--foreground))]">홀수 등수</span> — <span className="italic text-[hsl(var(--muted-foreground))]">추후 공지</span>
                   </li>
                 </ul>
               </li>
