@@ -118,10 +118,12 @@ export class DatabaseStorage implements IStorage {
       const latest = memberMeasurements[memberMeasurements.length - 1];
 
       const muscleChange = latest.muscleMass - first.muscleMass;
-      const muscleScore = Math.round(muscleChange * 10) * 4; // 0.1kg당 4점
+      // 근력 감소 시 0점 (마이너스 미적용)
+      const muscleScore = Math.max(0, Math.round(muscleChange * 10) * 4);
 
       const fatChange = first.bodyFat - latest.bodyFat;
-      const fatScore = Math.round(fatChange * 10);
+      // 체지방 증가 시 0점 (마이너스 미적용)
+      const fatScore = Math.max(0, Math.round(fatChange * 10));
 
       const score = muscleScore + fatScore;
 

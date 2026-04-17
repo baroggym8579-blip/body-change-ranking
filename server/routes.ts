@@ -3,7 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertMemberSchema, insertMeasurementSchema } from "@shared/schema";
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "112211";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "bodychange2026";
 
 // 관리자 인증 미들웨어: x-admin-password 헤더 확인
 function requireAdmin(req: Request, res: Response, next: NextFunction) {
